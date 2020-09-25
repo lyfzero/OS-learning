@@ -1,0 +1,1 @@
+E:\coding\OS-rcore-learning\rust_learning\minigrep\target\debug\minigrep.exe: E:\coding\OS-rcore-learning\rust_learning\minigrep\src\lib.rs E:\coding\OS-rcore-learning\rust_learning\minigrep\src\main.rs
