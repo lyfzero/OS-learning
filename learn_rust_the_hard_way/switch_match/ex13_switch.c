@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
         {
         case 'a':
         case 'A':
-            printf("%d: 'A\n", i);
+            printf("%d: 'A'\n", i);
             break;
         case 'e':
         case 'E':
