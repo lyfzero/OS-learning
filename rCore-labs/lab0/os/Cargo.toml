@@ -1,14 +1,14 @@
 [package]
 name = "os"
 version = "0.1.0"
-authors = ["lyf"]
+authors = ["lyfzero <u201811495@hust.edu.cn>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 
-# stop directly when panic, because we did not implement the function of stack expansion
+# panic 时直接终止，无堆栈展开的功能
 [profile.dev]
 panic = "abort"
 
