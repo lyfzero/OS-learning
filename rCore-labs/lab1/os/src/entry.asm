@@ -8,6 +8,8 @@
 _start:
     la sp, boot_stack_top
     call rust_main
+    # jr x0
+    ld x1, (x0)
 
     # 声明字段 .bss.stack 作为操作系统启动时的栈
     .section .bss.stack

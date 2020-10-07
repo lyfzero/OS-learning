@@ -34,6 +34,8 @@ pub fn handle_interrupt(context: &mut Context, scause: Scause, stval: usize) {
         Trap::Exception(Exception::Breakpoint) => breakpoint(context), 
         // 时钟中断
         Trap::Interrupt(Interrupt::SupervisorTimer) => supervisor_timer(context),
+        // 访问不存在的地址
+        Trap::Exception(Exception::LoadFault) => load_fault(context, stval),
         // 其他情况，终止当前线程
         _ => fault(context, scause, stval),
     }
@@ -52,6 +54,16 @@ fn breakpoint(context: &mut Context) {
 /// 目前只会在 [`timer`] 模块中进行计数
 fn supervisor_timer(_: &Context) {
     timer::tick();
+}
+
+/// 处理访问不存在的地址
+///
+/// `panic!`
+fn load_fault(_: &Context, stval: usize) {
+    if stval == 0 {
+        println!("SUCCESS!");
+    }
+    panic!("load fault!!!");
 }
 
 /// 出现未能解决的异常
