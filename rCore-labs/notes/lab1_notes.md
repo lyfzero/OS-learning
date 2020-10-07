@@ -132,3 +132,53 @@
 
 
 [](imgs/lab1_run2_well.png)
+
+
+
+
+
+## 实验
+
+### 1
+
+- handler.rs 
+  -  `handle_interrupt` 函数：match加一个处理访问不存在地址的异常分支：      Trap::Exception(Exception::LoadFault) => load_fault(context),
+  - ``load_fault` 函数：
+
+```rust
+/// 处理访问不存在的地址
+///
+/// `panic!`
+fn load_fault(_: &Context) {
+    panic!("load fault!!!");
+}
+```
+
+- main.rs
+  - `rust_main`
+    - 注释掉最后一行`panic!("end of rust_main");` 来测试访问异常地址
+- `make run` 运行结果：（符合预期，已处理该异常）
+
+[](imgs/lab1_ex1.png)
+
+- 若不进行异常处理，输出如下：
+
+[](imgs/lab1_ex1_error.png)
+
+
+
+### 2
+
+-  `load_fault` 函数
+  - 修改参数，增加`stval
+  - 增加 `if` 语句判断访问地址是否为0, 若是，打印“SUCCESS!"
+
+
+
+### 3
+
+1. 在`entry.asm ` 中 调用`rust_main后` 加入 `jr x0`
+
+[](imgs/lab1_ex3_run3_well.png)
+
+2. 在`entry.asm ` 中 调用`rust_main `后加入 `ld x1, (x0)`
