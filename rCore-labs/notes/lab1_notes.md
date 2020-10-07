@@ -91,7 +91,7 @@
 
 ### 1
 
-[](imgs/lab1_error1.png)
+![](imgs/lab1_error1.png)
 
 修改：
 
@@ -101,7 +101,7 @@
 
 ### 2
 
-[](imgs/lab1_error2.png)
+![](imgs/lab1_error2.png)
 
 修改：
 
@@ -110,7 +110,7 @@
 
 ### 3
 
-[](imgs/lab1_error3.png)
+![](imgs/lab1_error3.png)
 
 修改：
 
@@ -118,7 +118,7 @@
 
 ### 4（时钟中断）
 
-[](imgs/lab1_error4.png)
+![](imgs/lab1_error4.png)
 
 修改：
 
@@ -127,11 +127,11 @@
 
 ### 运行结果
 
-[](imgs/lab1_run1_well.png)
+![](imgs/lab1_run1_well.png)
 
 
 
-[](imgs/lab1_run2_well.png)
+![](imgs/lab1_run2_well.png)
 
 
 
@@ -159,11 +159,13 @@ fn load_fault(_: &Context) {
     - 注释掉最后一行`panic!("end of rust_main");` 来测试访问异常地址
 - `make run` 运行结果：（符合预期，已处理该异常）
 
-[](imgs/lab1_ex1.png)
+
+
+![](imgs/lab1_ex1.png)
 
 - 若不进行异常处理，输出如下：
 
-[](imgs/lab1_ex1_error.png)
+![](./imgs/lab1_ex1_error.png)
 
 
 
@@ -179,6 +181,6 @@ fn load_fault(_: &Context) {
 
 1. 在`entry.asm ` 中 调用`rust_main后` 加入 `jr x0`
 
-[](imgs/lab1_ex3_run3_well.png)
+![](./imgs/lab1_ex3_run1_well.png)
 
 2. 在`entry.asm ` 中 调用`rust_main `后加入 `ld x1, (x0)`

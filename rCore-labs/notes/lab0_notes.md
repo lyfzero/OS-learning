@@ -189,4 +189,4 @@ RISC-V 64的特权级
 
 成功运行！
 
-![runwell](/home/lyf/Desktop/os-learning/rCore-labs/notes/imgs/lab0_notes_runwell.png)
+![runwell](./imgs/lab0_notes_runwell.png)
