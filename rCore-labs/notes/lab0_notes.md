@@ -31,11 +31,12 @@
 
 
 
-复习一下Rust语法：
+## 复习一下Rust语法：
 
-- 注释（三种）
-  - `\\`
-  - `\\\`：文档注释，可以通过xxx生成文档
+- 注释
+  - `//`
+  - `//!`：注释外层内容
+  - `///`：函数的doc注释，Markdown语法
 - 宏`println!`
   - 属于std，以来OS标准输出
   - 怎样写不依赖OS的实现？
@@ -70,7 +71,6 @@
   - 禁用：将dev和release配置的panic处理策略设为直接终止（`abort`）
     - 直接调用`panic_handler`
     - 写在`Cargo.toml`文件中
-
 - 什么是运行时系统
   - main函数不是实际执行的第一个函数
   - Rust程序（链接了标准库）
@@ -81,11 +81,6 @@
     - 什么是第一条指令，POST（自检），启动代码（Bootloader）
     - 怎样设置内核的运行环境
     - RISC-V下汇编怎么写？
-- RISC-V 64的特权级
-  - U Mode(user/application)
-  - S Mode(Supervisor)
-  - M Mode(machine)
-  - 怎样修改
 - FFI（语言交互接口）语法
   - `extern "C"`：表示为C函数
 - Linux的可执行文件格式？
@@ -126,6 +121,41 @@
   - 等工具
 - `file xxx(某文件)`：查看文件类型
   - 可执行文件（位、格式、可执行、架构、链接方式、符号表信息）
+- makefile怎么写
+  - 有一个坑，`make run`的时候出现错误：
+    - `Makefile:16: *** 遗漏分割符（null）`
+    - 命令行未从tab开始，将每个命令前面的空格全部改为 tab就可以了；
+    - 或者反斜线后多了空格
+    - （用vscode的高亮看的很清楚）
+- 怎样进行接口封装和代码整理
+  - SBI是什么
+    - 底层系统服务接口，S mode 和 M mode执行环境间的标准接口约定
+    - ecall
+      - 指定SBI调用的编号，传递参数
+- calling convention是什么https://en.wikipedia.org/wiki/Calling_convention
+  - https://riscv.org/wp-content/uploads/2015/01/riscv-calling.pdf
+- 怎样实现rust代码与汇编代码的互操作
+  - `global_asm!`插入
+  - 内联汇编？？
+- 怎样实现自己的print！宏
+- console.rs没看懂
+- 整理模块划分
+
+
+
+## RISC-V相关
+
+RISC-V 64的特权级
+
+- U Mode(user/application)
+- S Mode(Supervisor)，内核态
+  - 可访问一些supervisor级别的寄存器（对中断和虚拟内存映射进行管理
+- M Mode(machine)，机器态
+  - 可通过异常委托机制将部分中断设置为不经过机器态，直接由内核态处理
+- 怎样修改
+
+
+
 - 怎样生成镜像
 - 内核镜像是什么？
   - kernel.bin
@@ -148,29 +178,12 @@
       - 入口地址
       - 怎样使用链接脚本
   - OpenSBIhttps://github.com/riscv/opensbi
-- makefile怎么写
-  - 有一个坑，`make run`的时候出现错误：
-    - `Makefile:16: *** 遗漏分割符（null）`
-    - 命令行未从tab开始，将每个命令前面的空格全部改为 tab就可以了；
-    - 或者反斜线后多了空格
-    - （用vscode的高亮看的很清楚）
-
-- 怎样进行接口封装和代码整理
-  - SBI是什么
-    - 底层系统服务接口，S mode 和 M mode执行环境间的标准接口约定
-    - ecall
-      - 指定SBI调用的编号，传递参数
-- calling convention是什么https://en.wikipedia.org/wiki/Calling_convention
-  - https://riscv.org/wp-content/uploads/2015/01/riscv-calling.pdf
-  - 
-- 怎样实现rust代码与汇编代码的互操作
-  - `global_asm!`插入
-  - 内联汇编？？
-- 怎样实现自己的print！宏
-- console.rs没看懂
-- 整理模块划分
 
 
+
+
+
+还没整理完
 
 
 
