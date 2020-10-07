@@ -19,6 +19,10 @@
     - 陷阱（Trap）：导致中断的指令
       - 如系统调用
     - 硬件中断（Hardware Interrupt）
+  - RISC-V 中断
+    - 软件中断：SSIE/SSIP
+    - 时钟中断：STIE/STIP
+    - 外部中断：SEIE/SEIP
 - CSR寄存器（中断相关）https://content.riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf
   - 中断时，硬件自动填写的
     - `sepc`：触发中断的指令的地址
@@ -69,7 +73,6 @@
   - 开启时钟中断
   - 设置时钟种断
   - 实现处理流程
-  - 
 
 
 
@@ -79,3 +82,53 @@
 - 类的写法
 - `#[repr(C)]`
 - `#[derive(Debug)]`
+
+
+
+
+
+## error
+
+### 1
+
+[](imgs/lab1_error1.png)
+
+修改：
+
+将context.rs文件中的 `use riscv::register::{sstatus::Sstatus, scause::Scause};` 改为`use riscv::register::sstatus::Sstatus;`
+
+在handler.rs文件中加入`use riscv::register::scause::Scause;`
+
+### 2
+
+[](imgs/lab1_error2.png)
+
+修改：
+
+- 加_
+- 打错了`.global __iterrupt`
+
+### 3
+
+[](imgs/lab1_error3.png)
+
+修改：
+
+- `interrupt.asm` 中掉了`__ieterrupt` 
+
+### 4（时钟中断）
+
+[](imgs/lab1_error4.png)
+
+修改：
+
+- handler.rs中加入`use riscv::register::{scause::{Scause, Exception, Interrupt, Trap}, stvec,};`
+- rust_main函数返回类型不匹配：去掉返回！
+
+### 运行结果
+
+[](imgs/lab1_run1_well.png)
+
+
+
+[](imgs/lab1_run2_well.png)

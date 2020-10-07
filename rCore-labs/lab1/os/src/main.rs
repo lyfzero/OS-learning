@@ -2,10 +2,6 @@
 //! - `#![no_std]`
 //! 禁用标准库
 #![no_std]
-
-// fn main() {
-//     // println!("Hello, rCore-Tutorial!");
-// }
 //!
 //! - `#![nomain]`
 //! 不使用`main`函数等全部 Rust-level 入口点作为程序入口
@@ -25,6 +21,7 @@
 
 #[macro_use]
 mod console;
+mod interrupt;
 mod panic;
 mod sbi;
 
@@ -35,7 +32,15 @@ global_asm!(include_str!("entry.asm"));
 /// 
 /// 在 `_start` 进行一系列准备后，第一个被调用的Rust函数
 #[no_mangle]
-pub extern "C" fn rust_main() -> ! {
+pub extern "C" fn rust_main() {
+    // 初始化各种模块
+    interrupt::init();
+
     println!("Hello rCore-Tutorial!");
-    panic!("end of rust_main")
+
+    unsafe {
+        llvm_asm!("ebreak"::::"volatile");
+    };
+
+    panic!("end of rust_main");
 }
