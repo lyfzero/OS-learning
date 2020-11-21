@@ -28,5 +28,53 @@
   - SLAB
 - 物理内存
   - 物理内存探测
+    - OpenSBI
+      - 对包括物理内存在内的各外设扫描，将结果以DTB格式保存在物理内存中
+      - 将地址保存在`a1`
+    - QEMU代码`virt_memmap[]`
   - 物理页
+    - 分配物理内存以物理页（4KB）为单位
+    - 物理页号PPN，表示范围 [PPN x 4KB, (PPN + 1) x 4KB]
+    - 
 
+
+
+
+
+### 1
+
+- 模块完善
+  - 增加`memory/mod.rs`
+    - 初始化子模块
+  - `Cargo.toml`
+    - 增加依赖`buddy_system_allocator(0.3.0)`
+  - `main.rs`
+    - 增加模块`memory`
+    - 外部crate`alloc`
+    - unstable的功能说明
+      - `#![feature(alloc_error_handler)]`
+
+运行成功：
+
+![run_well](./imgs/lab2_run1_well.png)
+
+
+
+### 2
+
+- 模块完善
+  - `memory/config.rs`
+    - 定义常量`PAGE_SIZE`
+    - 加入使用`address`和`lazy_static`中内容
+  - `Cargo.toml`
+    - 加入依赖`lazy_static`
+
+运行成功：
+
+![](./imgs/lab2_run2_well.png)
+
+
+
+### 3
+
+![](./imgs/lab2_run3_well.png)
